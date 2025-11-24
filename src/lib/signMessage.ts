@@ -6,7 +6,7 @@ import bs58 from 'bs58';
  */
 export function generateSignMessage(walletAddress: string): string {
   const timestamp = Date.now();
-  const message = `Sign this message to verify wallet ownership for onlyPrinters\n\nWallet: ${walletAddress}\nTimestamp: ${timestamp}`;
+  const message = `Sign this message to verify wallet ownership for Pro Nuke League (PNL)\n\nWallet: ${walletAddress}\nTimestamp: ${timestamp}`;
   return message;
 }
 

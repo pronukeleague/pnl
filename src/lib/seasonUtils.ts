@@ -1,5 +1,5 @@
 /**
- * Season utilities for onlyPrinters
+ * Season utilities for Pro Nuke League (PNL)
  * A season is a 24-hour period starting at 00:00 UTC (midnight) each day
  */
 

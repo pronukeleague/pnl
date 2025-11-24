@@ -1,9 +1,9 @@
 /**
  * Cron jobs for scheduled tasks
- * - Updates trader stats from Axiom API every 10 minutes
+ * - Updates trader stats from Axiom API every 5 minutes
  * - Claims creator fees from Pump.fun every 15 minutes
- * - Validates token holdings every 30 minutes (flags traders who sold $PRINT)
- * - Performs prize draws every 2 hours (at even hours)
+ * - Validates token holdings every 30 minutes (flags traders who sold $PNL)
+ * - Performs prize draws every hour
  * 
  * ⚠️ SECURITY NOTE:
  * Cron jobs call functions DIRECTLY (not via HTTP API endpoints)
@@ -134,7 +134,7 @@ async function claimCreatorFeesTask() {
 
 /**
  * Validate token holdings for all active traders
- * Runs every 30 minutes to check if traders still hold required $PRINT tokens
+ * Runs every 30 minutes to check if traders still hold required $PNL tokens
  */
 async function validateTokenHoldings() {
   if (isTokenCheckRunning) {
@@ -145,7 +145,7 @@ async function validateTokenHoldings() {
   try {
     isTokenCheckRunning = true;
     const seasonId = getCurrentSeasonId();
-    const requiredBalance = parseInt(process.env.OP_TOKEN_REQUIRED || '100000', 10);
+    const requiredBalance = parseInt(process.env.OP_TOKEN_REQUIRED || '1000000', 10);
     const tokenMint = process.env.OP_TOKEN_MINT;
     const rpcEndpoint = process.env.SOLANA_RPC_ENDPOINT || 'https://api.mainnet-beta.solana.com';
 
@@ -192,7 +192,7 @@ async function validateTokenHoldings() {
         );
 
         if (!hasBalance && !trader.soldPrint) {
-          // Trader sold $PRINT - flag them
+          // Trader sold $PNL - flag them
           await DailyTrader.findByIdAndUpdate(trader._id, {
             soldPrint: true,
             lastTokenCheck: new Date(),
@@ -201,7 +201,7 @@ async function validateTokenHoldings() {
           console.log(`🚫 [TOKEN-CHECK] FLAGGED: ${userId.walletOriginal.substring(0, 8)}... (${balance.toLocaleString()} < ${requiredBalance.toLocaleString()})`);
           flagged++;
         } else if (hasBalance && trader.soldPrint) {
-          // Trader bought back $PRINT - unflag them
+          // Trader bought back $PNL - unflag them
           await DailyTrader.findByIdAndUpdate(trader._id, {
             soldPrint: false,
             lastTokenCheck: new Date(),
@@ -232,7 +232,7 @@ async function validateTokenHoldings() {
 
 /**
  * Perform prize draw task
- * Runs every 2 hours at even hours (00, 02, 04, etc.)
+ * Runs every hour
  */
 async function performDrawTask() {
   // Check if draws are enabled
@@ -240,7 +240,7 @@ async function performDrawTask() {
     return; // Draws disabled
   }
 
-  // shouldPerformDraw() checks if it's even hour and if draw wasn't already done
+  // shouldPerformDraw() checks if draw wasn't already done this hour
   const shouldDraw = await shouldPerformDraw();
   if (!shouldDraw) {
     return; // Not time for a draw or already done
@@ -267,15 +267,15 @@ async function performDrawTask() {
 export function initializeCronJobs() {
   console.log('🕐 Initializing cron jobs...');
 
-  // Update trader stats every 10 minutes
-  // Cron pattern: '*/10 * * * *' = every 10 minutes
-  const updateStatsJob = cron.schedule('*/10 * * * *', () => {
+  // Update trader stats every 5 minutes
+  // Cron pattern: '*/5 * * * *' = every 5 minutes
+  const updateStatsJob = cron.schedule('*/5 * * * *', () => {
     updateAllTradersStats();
   }, {
     timezone: 'UTC' // Use UTC to match season timing
   });
 
-  console.log('✅ Cron job scheduled: Update trader stats every 10 minutes');
+  console.log('✅ Cron job scheduled: Update trader stats every 5 minutes');
 
   // Claim creator fees every 15 minutes
   // Cron pattern: '*/15 * * * *' = every 15 minutes
@@ -299,16 +299,16 @@ export function initializeCronJobs() {
 
   console.log(`✅ Cron job scheduled: Validate token holdings every 30 minutes`);
 
-  // Perform prize draw every 2 hours at even hours (00:00, 02:00, 04:00, etc.)
-  // Cron pattern: '0 */2 * * *' = every 2 hours at minute 0
-  const prizeDrawJob = cron.schedule('0 */2 * * *', () => {
+  // Perform prize draw every hour
+  // Cron pattern: '0 * * * *' = every hour at minute 0
+  const prizeDrawJob = cron.schedule('0 * * * *', () => {
     performDrawTask();
   }, {
     timezone: 'UTC'
   });
 
   const drawsEnabled = process.env.SHOULD_PERFORM_DRAWS === 'true';
-  console.log(`✅ Cron job scheduled: Prize draw every 2 hours at even hours (00:00, 02:00, 04:00, etc.)`);
+  console.log(`✅ Cron job scheduled: Prize draw every hour (at minute 0)`);
   console.log(`   Prize draws are currently: ${drawsEnabled ? '🟢 ENABLED' : '🔴 DISABLED'}`);
 
   // Optional: Run immediately on startup (after 30 seconds delay)

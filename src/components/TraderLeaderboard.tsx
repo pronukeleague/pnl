@@ -98,16 +98,16 @@ export default function TraderLeaderboard() {
     fetchTraders();
     fetchRewards(); // Fetch rewards on load
     
-    // Auto-refresh every 30 seconds (only when page is visible)
+    // Auto-refresh every 1 minute (only when page is visible)
     const autoRefreshInterval = setInterval(() => {
       // Check if page is visible (user is on the tab)
       if (!document.hidden) {
-        console.log('🔄 Auto-refreshing leaderboard (30s interval)');
+        console.log('🔄 Auto-refreshing leaderboard (1min interval)');
         fetchTraders(true); // Silent refresh
       } else {
         console.log('⏭️  Skipping auto-refresh (page hidden)');
       }
-    }, 30000); // 30 seconds
+    }, 60000); // 1 minute = 60000ms
     
     // Refresh when user returns to the tab
     const handleVisibilityChange = () => {
@@ -146,15 +146,15 @@ export default function TraderLeaderboard() {
   };
 
   const getPnlColor = (value: number) => {
-    if (value > 0) return 'text-green-600';
-    if (value < 0) return 'text-red-600';
+    if (value > 0) return 'text-red-600';
+    if (value < 0) return 'text-gray-600';
     return 'text-gray-600';
   };
 
   if (loading) {
     return (
       <div className="flex justify-center items-center p-8">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-500"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
       </div>
     );
   }
@@ -172,7 +172,7 @@ export default function TraderLeaderboard() {
     return (
       <div>
         <CountdownTimer rewardPool={rewardPool} />
-        <div className="bg-white rounded-lg shadow-md border border-green-200 p-8 text-center">
+        <div className="bg-white rounded-lg shadow-md border border-red-200 p-8 text-center">
           <p className="text-gray-600 text-lg">No traders yet today</p>
           <p className="text-gray-500 text-sm mt-2">Be the first to join!</p>
         </div>
@@ -186,7 +186,7 @@ export default function TraderLeaderboard() {
       <CountdownTimer rewardPool={rewardPool} />
 
       {/* Leaderboard Table */}
-      <div className="bg-white rounded-lg shadow-md border border-green-200 overflow-hidden">
+      <div className="bg-white rounded-lg shadow-md border border-red-200 overflow-hidden">
         {/* Data Update Notice */}
         <div className="bg-blue-50 border-b border-blue-200 px-6 py-3">
           <div className="flex items-center gap-2 text-sm">
@@ -194,19 +194,24 @@ export default function TraderLeaderboard() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             <span className="text-blue-800">
-              <span className="font-semibold">PNL data recalculated every ~10 minutes</span>
+              <span className="font-semibold">PNL data recalculated every ~5 minutes</span>
             </span>
           </div>
         </div>
 
-        <div className="p-6 border-b border-green-200">
+        <div className="p-6 border-b border-red-200">
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-2xl font-bold text-gray-900">
-                Printers Leaderboard
+                <span className="text-red-600">P</span>
+                <span>ro </span>
+                <span className="text-red-600">N</span>
+                <span>uke </span>
+                <span className="text-red-600">L</span>
+                <span>eaderboard</span>
               </h2>
               <p className="text-gray-600 text-sm mt-1">
-                Top performers on onlyPrinters
+                Top performers on <span className="text-red-600">P</span>ro <span className="text-red-600">N</span>uke <span className="text-red-600">L</span>eague
                 {lastUpdated && (
                   <span className="text-gray-400 ml-2">
                     • Updated {lastUpdated.toLocaleTimeString()}
@@ -216,7 +221,7 @@ export default function TraderLeaderboard() {
             </div>
             <div className="flex flex-col items-end gap-1">
               {isRefreshing && (
-                <div className="flex items-center text-green-600 text-sm">
+                <div className="flex items-center text-red-600 text-sm">
                   <svg className="animate-spin h-4 w-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -233,7 +238,7 @@ export default function TraderLeaderboard() {
 
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-green-50">
+            <thead className="bg-red-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
                   Rank
@@ -266,7 +271,7 @@ export default function TraderLeaderboard() {
                 const isCurrentUser = user && trader.walletAddress && user.wallet && 
                   trader.walletAddress.toLowerCase() === user.wallet.toLowerCase();
                 
-                // Calculate rank: only count traders who haven't sold $PRINT
+                // Calculate rank: only count traders who haven't sold $PNL
                 const validTraders = traders.filter(t => !t.soldPrint);
                 const rankNumber = validTraders.findIndex(t => t.id === trader.id) + 1;
                 const isDisqualified = trader.soldPrint;
@@ -276,10 +281,10 @@ export default function TraderLeaderboard() {
                     key={trader.id} 
                     className={`transition-colors ${
                       isCurrentUser 
-                        ? 'bg-green-100 hover:bg-green-200 border-l-4 border-green-500' 
+                        ? 'bg-red-100 hover:bg-red-200 border-l-4 border-red-500' 
                         : isDisqualified
                         ? 'bg-red-50 hover:bg-red-100 opacity-60'
-                        : 'hover:bg-green-50'
+                        : 'hover:bg-red-50'
                     }`}
                   >
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -287,7 +292,7 @@ export default function TraderLeaderboard() {
                         {isDisqualified ? (
                           <span className="text-sm font-bold text-red-600">DQ</span>
                         ) : (
-                          <span className={`text-sm font-bold ${isCurrentUser ? 'text-green-700' : 'text-gray-900'}`}>
+                          <span className={`text-sm font-bold ${isCurrentUser ? 'text-red-700' : 'text-gray-900'}`}>
                             #{rankNumber}
                           </span>
                         )}
@@ -296,28 +301,28 @@ export default function TraderLeaderboard() {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <Image
-                          className={`h-10 w-10 rounded-full ${isCurrentUser ? 'ring-2 ring-green-500' : ''}`}
+                          className={`h-10 w-10 rounded-full ${isCurrentUser ? 'ring-2 ring-red-500' : ''}`}
                           src={trader.avatar}
                           alt={trader.displayName}
                           width={40}
                           height={40}
                         />
                         <div className="ml-4">
-                          <div className={`text-sm font-medium flex items-center gap-2 ${isCurrentUser ? 'text-green-700 font-bold' : 'text-gray-900'}`}>
+                          <div className={`text-sm font-medium flex items-center gap-2 ${isCurrentUser ? 'text-red-700 font-bold' : 'text-gray-900'}`}>
                             {trader.displayName}
-                            {isCurrentUser && <span className="text-xs bg-green-500 text-white px-2 py-0.5 rounded-full">YOU</span>}
+                            {isCurrentUser && <span className="text-xs bg-red-600 text-white px-2 py-0.5 rounded-full">YOU</span>}
                             {trader.soldPrint && (
                               <span className="text-xs bg-red-500 text-white px-2 py-0.5 rounded-full font-semibold" title="Token balance below required amount">
-                                SOLD $PRINT
+                                SOLD $PNL
                               </span>
                             )}
                             <button
                               onClick={() => copyToClipboard(trader.walletOriginal)}
-                              className="text-gray-400 hover:text-green-600 transition-colors"
+                              className="text-gray-400 hover:text-red-600 transition-colors"
                               title="Copy wallet address"
                             >
                               {copiedWallet === trader.walletOriginal ? (
-                                <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg className="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                 </svg>
                               ) : (
@@ -353,10 +358,10 @@ export default function TraderLeaderboard() {
                       <div className="text-sm text-gray-900 font-semibold">{trader.totalTrades}</div>
                       <div className="text-xs text-gray-500">
                         {trader.pnlBreakdown.over500Percent > 0 && (
-                          <span className="text-green-600">🚀 {trader.pnlBreakdown.over500Percent}x</span>
+                          <span className="text-red-600">🚀 {trader.pnlBreakdown.over500Percent}x</span>
                         )}
                         {trader.pnlBreakdown.between200And500Percent > 0 && (
-                          <span className="text-green-500"> 🎯 {trader.pnlBreakdown.between200And500Percent}x</span>
+                          <span className="text-red-500"> 🎯 {trader.pnlBreakdown.between200And500Percent}x</span>
                         )}
                       </div>
                     </td>

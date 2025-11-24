@@ -140,7 +140,7 @@ export default function JoinByAddress({ onSuccess }: JoinByAddressProps) {
   const getBorderColor = () => {
     if (!walletAddress) return 'border-gray-300';
     if (addressError) return 'border-red-400';
-    if (validationResult?.success) return 'border-green-500';
+    if (validationResult?.success) return 'border-red-500';
     if (validationResult && !validationResult.success) return 'border-red-400';
     return 'border-gray-300';
   };
@@ -157,7 +157,7 @@ export default function JoinByAddress({ onSuccess }: JoinByAddressProps) {
           value={walletAddress}
           onChange={handleAddressChange}
           placeholder="Enter Solana wallet address..."
-          className={`w-full px-4 py-3 bg-white border-2 ${getBorderColor()} rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 transition-colors`}
+          className={`w-full px-4 py-3 bg-white border-2 ${getBorderColor()} rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-400 transition-colors`}
           disabled={isValidating || isJoining}
         />
         {addressError && (
@@ -166,12 +166,12 @@ export default function JoinByAddress({ onSuccess }: JoinByAddressProps) {
       </div>
 
       {validationResult && (
-        <div className={`p-4 rounded-lg ${validationResult.success ? 'bg-green-50 border-2 border-green-500' : 'bg-red-50 border-2 border-red-400'}`}>
+        <div className={`p-4 rounded-lg ${validationResult.success ? 'bg-red-50 border-2 border-red-500' : 'bg-red-50 border-2 border-red-400'}`}>
           {validationResult.success && validationResult.data ? (
             <div className="space-y-2">
-              <p className="text-green-700 font-medium">✅ Wallet is eligible!</p>
+              <p className="text-red-700 font-medium">✅ Wallet is eligible!</p>
               <div className="text-sm text-gray-700 space-y-1">
-                <p>Token Balance: <span className="font-mono text-green-700 font-semibold">{validationResult.data.tokenBalance.toLocaleString()}</span></p>
+                <p>Token Balance: <span className="font-mono text-red-700 font-semibold">{validationResult.data.tokenBalance.toLocaleString()}</span></p>
                 <p>Required: <span className="font-mono text-gray-600">{validationResult.data.requiredBalance.toLocaleString()}</span></p>
               </div>
             </div>
@@ -188,7 +188,7 @@ export default function JoinByAddress({ onSuccess }: JoinByAddressProps) {
           className={`w-full font-semibold py-3 px-4 rounded-lg transition-colors shadow-sm hover:shadow-md ${
             !walletAddress || !!addressError || isValidating || isJoining
               ? 'bg-gray-400 cursor-not-allowed text-white'
-              : 'bg-green-500 hover:bg-green-600 text-white'
+              : 'bg-red-600 hover:bg-red-700 text-white'
           }`}
         >
           {isValidating ? 'Checking...' : 'Check Eligibility'}
@@ -201,7 +201,7 @@ export default function JoinByAddress({ onSuccess }: JoinByAddressProps) {
             className={`w-full font-semibold py-3 px-4 rounded-lg transition-colors shadow-sm hover:shadow-md ${
               isJoining
                 ? 'bg-gray-400 cursor-not-allowed text-white'
-                : 'bg-green-500 hover:bg-green-600 text-white'
+                : 'bg-red-600 hover:bg-red-700 text-white'
             }`}
           >
             {isJoining ? 'Joining...' : 'Join Tournament'}

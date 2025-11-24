@@ -46,9 +46,9 @@ export default function CountdownTimer({ rewardPool }: CountdownTimerProps) {
         setTimeLeft({ hours: 0, minutes: 0, seconds: 0 });
       }
       
-      // Calculate next 2-hour draw time
+      // Calculate next hourly draw time
       const currentHour = now.getUTCHours();
-      const nextDrawHour = Math.ceil((currentHour + 1) / 2) * 2; // Next even hour
+      const nextDrawHour = currentHour + 1; // Next hour
       const nextDraw = new Date(Date.UTC(
         now.getUTCFullYear(),
         now.getUTCMonth(),
@@ -79,7 +79,7 @@ export default function CountdownTimer({ rewardPool }: CountdownTimerProps) {
   const formatNumber = (num: number) => String(num).padStart(2, '0');
 
   return (
-    <div className="bg-white rounded-lg shadow-md border border-green-200 p-6 mb-6">
+    <div className="bg-white rounded-lg shadow-md border border-red-200 p-6 mb-6">
       <div className="flex flex-col md:flex-row items-center justify-center gap-8">
         {/* Countdown Timer */}
         <div className="flex flex-col items-center">
@@ -87,22 +87,22 @@ export default function CountdownTimer({ rewardPool }: CountdownTimerProps) {
             Daily Reset In
           </h3>
           <div className="flex gap-2">
-            <div className="flex flex-col items-center bg-green-50 rounded-lg p-3 min-w-[70px]">
-              <span className="text-3xl font-bold text-green-600">
+            <div className="flex flex-col items-center bg-red-50 rounded-lg p-3 min-w-[70px]">
+              <span className="text-3xl font-bold text-red-600">
                 {formatNumber(timeLeft.hours)}
               </span>
               <span className="text-xs text-gray-600 mt-1">Hours</span>
             </div>
-            <div className="flex items-center text-2xl text-green-600 font-bold">:</div>
-            <div className="flex flex-col items-center bg-green-50 rounded-lg p-3 min-w-[70px]">
-              <span className="text-3xl font-bold text-green-600">
+            <div className="flex items-center text-2xl text-red-600 font-bold">:</div>
+            <div className="flex flex-col items-center bg-red-50 rounded-lg p-3 min-w-[70px]">
+              <span className="text-3xl font-bold text-red-600">
                 {formatNumber(timeLeft.minutes)}
               </span>
               <span className="text-xs text-gray-600 mt-1">Minutes</span>
             </div>
-            <div className="flex items-center text-2xl text-green-600 font-bold">:</div>
-            <div className="flex flex-col items-center bg-green-50 rounded-lg p-3 min-w-[70px]">
-              <span className="text-3xl font-bold text-green-600">
+            <div className="flex items-center text-2xl text-red-600 font-bold">:</div>
+            <div className="flex flex-col items-center bg-red-50 rounded-lg p-3 min-w-[70px]">
+              <span className="text-3xl font-bold text-red-600">
                 {formatNumber(timeLeft.seconds)}
               </span>
               <span className="text-xs text-gray-600 mt-1">Seconds</span>
@@ -120,11 +120,11 @@ export default function CountdownTimer({ rewardPool }: CountdownTimerProps) {
             Total Creator Rewards
           </h3>
           <div className="flex items-center gap-3">
-            <span className="text-4xl font-bold text-green-600">
+            <span className="text-4xl font-bold text-red-600">
               {rewardPool.toFixed(3)}
             </span>
             <svg
-              className="w-8 h-8 text-green-500"
+              className="w-8 h-8 text-red-500"
               viewBox="0 0 397.7 311.7"
               fill="currentColor"
             >
@@ -135,16 +135,16 @@ export default function CountdownTimer({ rewardPool }: CountdownTimerProps) {
           </div>
           <div className="text-center mt-3 space-y-1">
             <div className="flex items-center gap-2 justify-center">
-              <span className="text-xs font-semibold text-green-600">🎲 Next Draw:</span>
+              <span className="text-xs font-semibold text-red-600">🎲 Next Draw:</span>
               <span className="text-xs font-bold text-gray-900">
                 {formatNumber(nextDrawTime.hours)}:{formatNumber(nextDrawTime.minutes)}:{formatNumber(nextDrawTime.seconds)}
               </span>
             </div>
             <p className="text-xs text-gray-600 leading-tight">
-              Every 2 hours: Top 3 traders compete
+              Every hour: Top 3 traders compete
             </p>
             <div className="flex items-center gap-2 justify-center mt-2">
-              <p className="text-xs font-semibold text-green-600">
+              <p className="text-xs font-semibold text-red-600">
                 Next Prize:
               </p>
               <div className="flex items-center gap-1">
@@ -152,7 +152,7 @@ export default function CountdownTimer({ rewardPool }: CountdownTimerProps) {
                   {(rewardPool * 0.1).toFixed(3)}
                 </span>
                 <svg
-                  className="w-3 h-3 text-green-500"
+                  className="w-3 h-3 text-red-500"
                   viewBox="0 0 397.7 311.7"
                   fill="currentColor"
                 >
@@ -165,7 +165,7 @@ export default function CountdownTimer({ rewardPool }: CountdownTimerProps) {
             </div>
             <button
               onClick={() => setShowWinnersModal(true)}
-              className="mt-3 px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-xs font-semibold rounded-lg transition-colors flex items-center gap-2 mx-auto"
+              className="mt-3 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold rounded-lg transition-colors flex items-center gap-2 mx-auto"
             >
               <span>🏆</span>
               View Winners

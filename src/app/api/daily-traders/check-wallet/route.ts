@@ -4,7 +4,7 @@ import { getTokenBalance } from '@/lib/tokenService';
 
 /**
  * POST /api/daily-traders/check-wallet
- * Validates Solana address and checks if it holds required $PRINT tokens
+ * Validates Solana address and checks if it holds required $PNL tokens
  * Used for manual wallet entry (paste address instead of connecting wallet)
  */
 export async function POST(request: NextRequest) {
@@ -48,8 +48,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Get required token balance from environment (default: 100,000 $PRINT)
-    const requiredBalance = parseFloat(process.env.OP_TOKEN_REQUIRED || '100000');
+    // Get required token balance from environment (default: 1,000,000 $PNL)
+    const requiredBalance = parseInt(process.env.OP_TOKEN_REQUIRED || '1000000', 10);
 
     console.log(`🔍 Checking wallet ${wallet} for token balance...`);
 

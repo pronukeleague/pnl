@@ -5,9 +5,9 @@ import { useState } from 'react';
 export default function Footer() {
   const [copied, setCopied] = useState(false);
   const CA = process.env.NEXT_PUBLIC_OP_TOKEN_MINT || 'xxxxxxxxxxxxxxxxxxxpump';
-  const telegramUrl = process.env.NEXT_PUBLIC_TELEGRAM_URL || 'https://t.me/onlyprinters';
-  const xUrl = process.env.NEXT_PUBLIC_X_URL || 'https://x.com/onlyprinters_';
-  const githubUrl = process.env.NEXT_PUBLIC_GITHUB_URL || 'https://github.com/onlyprinters/op';
+  const telegramUrl = process.env.NEXT_PUBLIC_TELEGRAM_URL || 'https://t.me/pronukeleague';
+  const xUrl = process.env.NEXT_PUBLIC_X_URL || 'https://x.com/pronukeleague';
+  const githubUrl = process.env.NEXT_PUBLIC_GITHUB_URL || 'https://github.com/pronukeleague/pnl';
 
   const copyCA = async () => {
     try {
@@ -20,13 +20,13 @@ export default function Footer() {
   };
 
   return (
-    <footer className="fixed bottom-0 left-0 right-0 bg-green-500/10 backdrop-blur-sm border-t border-green-200/30 z-50">
+    <footer className="fixed bottom-0 left-0 right-0 bg-red-500/10 backdrop-blur-sm border-t border-red-200/30 z-50">
       <div className="max-w-7xl mx-auto px-4 py-1">
         <div className="flex flex-row items-center justify-between gap-2 sm:gap-4 text-xs">
           {/* Motivational Tagline */}
           <div className="hidden sm:block">
             <p className="text-gray-600 font-medium">
-              💎 Survive, print, repeat
+              � Trade hard, win harder
             </p>
           </div>
 
@@ -80,17 +80,17 @@ export default function Footer() {
             {/* Contract Address */}
             <button
               onClick={copyCA}
-              className="text-gray-700 font-mono font-medium hover:text-green-600 transition-colors flex items-center gap-1.5 group"
+              className="text-gray-700 font-mono font-medium hover:text-red-600 transition-colors flex items-center gap-1.5 group"
               title="Click to copy CA"
             >
               <span className="text-gray-500 text-[10px] uppercase tracking-wider hidden sm:inline">CA:</span>
               <span className="truncate max-w-[120px] sm:max-w-none">{CA}</span>
               {copied ? (
-                <svg className="w-3 h-3 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-3 h-3 text-red-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               ) : (
-                <svg className="w-3 h-3 text-gray-400 group-hover:text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-3 h-3 text-gray-400 group-hover:text-red-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
               )}

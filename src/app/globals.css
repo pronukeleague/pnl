@@ -8,7 +8,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-fjalla-one);
+  --font-sans: var(--font-press-start);
+  --font-heading: var(--font-pixelify);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -21,26 +22,48 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-fjalla-one), Arial, Helvetica, sans-serif;
+  font-family: var(--font-press-start), monospace;
+  font-size: 0.875rem; /* 14px - zmniejszony rozmiar tekstu */
+  line-height: 1.6;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-fjalla-one), Arial, Helvetica, sans-serif;
+  font-family: var(--font-pixelify), monospace;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+}
+
+h1 {
+  font-size: 3rem; /* 48px */
+}
+
+h2 {
+  font-size: 2.25rem; /* 36px */
+}
+
+h3 {
+  font-size: 1.75rem; /* 28px */
+}
+
+h4 {
+  font-size: 1.5rem; /* 24px */
 }
 
 /* Wallet Adapter Button Styles - Only the main button, not the modal */
 .wallet-adapter-button-trigger {
-  background-color: #10b981 !important;
+  background-color: #dc2626 !important;
   border-radius: 0.5rem !important;
-  font-family: var(--font-fjalla-one), Arial, Helvetica, sans-serif !important;
-  font-weight: 500 !important;
+  font-family: var(--font-press-start), monospace !important;
+  font-weight: 400 !important;
+  font-size: 0.75rem !important; /* Zmniejszony rozmiar dla przycisków */
   transition: all 0.2s ease !important;
   border: none !important;
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1) !important;
 }
 
 .wallet-adapter-button-trigger:not([disabled]):hover {
-  background-color: #059669 !important;
+  background-color: #b91c1c !important;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1) !important;
 }
 

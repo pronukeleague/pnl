@@ -1,6 +1,6 @@
-# onlyPrinters Project Instructions
+# Pro Nuke League (PNL) Project Instructions
 
-This is a Next.js full-stack application for printer management.
+This is a Next.js full-stack application for trading competition management.
 
 ## Project Setup
 - Framework: Next.js 14+ with TypeScript
@@ -30,7 +30,7 @@ This is a Next.js full-stack application for printer management.
 ✅ MongoDB database with User and DailyTrader models
 ✅ Token-gated competition system (SPL Token verification)
 ✅ 24-hour season system (00:00 UTC midnight resets)
-✅ Automated cron jobs (updates stats every 10 minutes)
+✅ Automated cron jobs (updates stats every 5 minutes)
 ✅ Leaderboard with real-time trader statistics
 
 Ready for development! Run `npm run dev` to start the application.
@@ -39,6 +39,6 @@ Ready for development! Run `npm run dev` to start the application.
 - **Wallet Authentication**: Phantom wallet with signature verification
 - **Trading Competition**: 24h seasons with real Solana trading data
 - **Axiom Integration**: Fetches portfolio metrics (PNL, trades, volume)
-- **Automated Updates**: Cron jobs update trader stats every 10 minutes
+- **Automated Updates**: Cron jobs update trader stats every 5 minutes
 - **Leaderboard**: Ranks traders by realized PNL with detailed breakdowns
 - **Season Statistics**: Real-time aggregated stats (active traders, volume, trades)

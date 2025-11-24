@@ -4,7 +4,7 @@ import bs58 from 'bs58';
 // Client-side service for user registration and login
 
 // LocalStorage key for JWT token
-const TOKEN_STORAGE_KEY = 'onlyprinters_auth_token';
+const TOKEN_STORAGE_KEY = 'pnl_auth_token';
 
 export interface UserData {
   id: string;

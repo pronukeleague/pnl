@@ -1,4 +1,4 @@
-// Utility functions for the onlyPrinters application
+// Utility functions for the Pro Nuke League (PNL) application
 
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';

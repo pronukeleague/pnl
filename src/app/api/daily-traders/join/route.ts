@@ -7,7 +7,7 @@ import { getCurrentSeasonId } from '@/lib/seasonUtils';
 import mongoose from 'mongoose';
 
 const OP_TOKEN_MINT = process.env.OP_TOKEN_MINT;
-const OP_TOKEN_REQUIRED = parseInt(process.env.OP_TOKEN_REQUIRED || '100000', 10);
+const OP_TOKEN_REQUIRED = parseInt(process.env.OP_TOKEN_REQUIRED || '1000000', 10);
 const SOLANA_RPC_ENDPOINT = process.env.SOLANA_RPC_ENDPOINT || 'https://api.mainnet-beta.solana.com';
 
 export async function POST(request: NextRequest) {
@@ -85,7 +85,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          error: `Insufficient $PRINT tokens. Required: ${OP_TOKEN_REQUIRED.toLocaleString()}, Your balance: ${balance.toLocaleString()}`,
+          error: `Insufficient $PNL tokens. Required: ${OP_TOKEN_REQUIRED.toLocaleString()}, Your balance: ${balance.toLocaleString()}`,
           data: {
             required: OP_TOKEN_REQUIRED,
             balance: balance,

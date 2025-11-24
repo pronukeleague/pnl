@@ -252,7 +252,7 @@ export default function Sidebar() {
   if (checkingStatus) {
     return (
       <aside className="w-full">
-        <div className="bg-white rounded-lg shadow-md p-6 border border-green-200">
+        <div className="bg-white rounded-lg shadow-md p-6 border border-red-200">
           <div className="text-center">
             <div className="animate-pulse">
               <div className="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-4"></div>
@@ -295,13 +295,13 @@ export default function Sidebar() {
 
   return (
     <aside className="w-full">
-      <div className="bg-white rounded-lg shadow-md p-6 border border-green-200">
+      <div className="bg-white rounded-lg shadow-md p-6 border border-red-200">
         <div className="text-center">
           <Link href="/" className="flex justify-center mb-4 cursor-pointer hover:opacity-80 transition-opacity">
             <div className="w-20 h-20 rounded-full overflow-hidden">
               <Image
                 src="/logo.png"
-                alt="onlyPrinters Logo"
+                alt="Pro Nuke League Logo"
                 width={80}
                 height={80}
                 className="object-cover"
@@ -309,11 +309,14 @@ export default function Sidebar() {
             </div>
           </Link>
 
-          <span className="ml-3 text-2xl font-bold font-[family-name:var(--font-astron-boy)]">
+          <span className="ml-3 text-2xl font-bold" style={{ fontFamily: 'var(--font-pixelify)' }}>
             <span className="text-gray-900">Join </span>
-
-            <span className="text-green-500">Only</span>
-            <span className="text-gray-900">Printers</span>
+            <span className="text-red-600">P</span>
+            <span className="text-gray-900">ro </span>
+            <span className="text-red-600">N</span>
+            <span className="text-gray-900">uke </span>
+            <span className="text-red-600">L</span>
+            <span className="text-gray-900">eague</span>
           </span>
 
           <p className="text-gray-600 text-sm mb-6">
@@ -347,7 +350,7 @@ export default function Sidebar() {
           {message && (
             <div
               className={`mb-4 p-3 rounded-lg text-sm ${message.type === 'success'
-                ? 'bg-green-50 text-green-800 border border-green-200'
+                ? 'bg-red-50 text-red-800 border border-red-200'
                 : 'bg-red-50 text-red-800 border border-red-200'
                 }`}
             >
@@ -363,7 +366,7 @@ export default function Sidebar() {
               disabled={loading || hasJoined || !connected}
               className={`w-full font-semibold py-3 px-4 rounded-lg transition-colors shadow-sm hover:shadow-md ${loading || hasJoined || !connected
                 ? 'bg-gray-400 cursor-not-allowed'
-                : 'bg-green-500 hover:bg-green-600 text-white'
+                : 'bg-red-600 hover:bg-red-700 text-white'
                 }`}
             >
               {loading ? 'Checking...' : hasJoined ? 'Joined Today!' : connected ? 'Sign Up Now' : 'Connect Wallet'}

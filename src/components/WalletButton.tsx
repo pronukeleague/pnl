@@ -7,8 +7,8 @@ export default function WalletButton() {
     <WalletMultiButton 
       className="
         wallet-adapter-button
-        !bg-green-500 
-        hover:!bg-green-600 
+        !bg-red-600 
+        hover:!bg-red-700 
         !rounded-lg 
         !px-2 sm:!px-4 
         !py-1.5 sm:!py-2 

@@ -109,19 +109,19 @@ export default function WinnersModal({ isOpen, onClose }: WinnersModalProps) {
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden flex flex-col">
         {/* Header */}
-        <div className="bg-gradient-to-r from-green-600 to-green-500 p-6">
+        <div className="bg-gradient-to-r from-red-600 to-red-500 p-6">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-2xl font-bold text-white flex items-center gap-2">
                 🏆 Prize Draw Winners
               </h2>
-              <p className="text-green-100 text-sm mt-1">
+              <p className="text-red-100 text-sm mt-1">
                 History of all prize draws and winners
               </p>
             </div>
             <button
               onClick={onClose}
-              className="text-white hover:text-green-200 transition-colors"
+              className="text-white hover:text-red-200 transition-colors"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -151,7 +151,7 @@ export default function WinnersModal({ isOpen, onClose }: WinnersModalProps) {
                     day: 'numeric'
                   })}
                 </p>
-                <p className="text-green-100 text-xs">
+                <p className="text-red-100 text-xs">
                   {draws.length} draw{draws.length !== 1 ? 's' : ''} on this day
                   {isToday && ' • Current'}
                 </p>
@@ -191,7 +191,7 @@ export default function WinnersModal({ isOpen, onClose }: WinnersModalProps) {
         <div className="flex-1 overflow-y-auto p-6">
           {loading ? (
             <div className="flex items-center justify-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
             </div>
           ) : error ? (
             <div className="text-center py-12">
@@ -209,7 +209,7 @@ export default function WinnersModal({ isOpen, onClose }: WinnersModalProps) {
                 return (
                   <div 
                     key={draw.drawId} 
-                    className="bg-gradient-to-br from-gray-50 to-white rounded-lg border-2 border-gray-200 hover:border-green-300 transition-all shadow-sm hover:shadow-md"
+                    className="bg-gradient-to-br from-gray-50 to-white rounded-lg border-2 border-gray-200 hover:border-red-300 transition-all shadow-sm hover:shadow-md"
                   >
                     {/* Draw Summary (Always Visible) */}
                     <div 
@@ -219,8 +219,8 @@ export default function WinnersModal({ isOpen, onClose }: WinnersModalProps) {
                       <div className="flex items-center justify-between gap-4">
                         {/* Left: Time & ID */}
                         <div className="flex items-center gap-3">
-                          <div className="bg-green-100 p-2 rounded-lg">
-                            <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <div className="bg-red-100 p-2 rounded-lg">
+                            <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                           </div>
@@ -262,7 +262,7 @@ export default function WinnersModal({ isOpen, onClose }: WinnersModalProps) {
                         {/* Right: Prize & Expand */}
                         <div className="flex items-center gap-3">
                           <div className="text-right">
-                            <p className="text-lg font-bold text-green-600">
+                            <p className="text-lg font-bold text-red-600">
                               {draw.prizeAmount.toFixed(3)} SOL
                             </p>
                             <p className="text-xs text-gray-500">
@@ -292,7 +292,7 @@ export default function WinnersModal({ isOpen, onClose }: WinnersModalProps) {
                           </div>
                           <div className="bg-gray-50 p-3 rounded-lg text-center">
                             <p className="text-xs text-gray-600">Prize Share</p>
-                            <p className="text-sm font-bold text-green-600">
+                            <p className="text-sm font-bold text-red-600">
                               {((draw.prizeAmount / draw.totalPoolAtDraw) * 100).toFixed(1)}%
                             </p>
                           </div>
@@ -318,7 +318,7 @@ export default function WinnersModal({ isOpen, onClose }: WinnersModalProps) {
                               {draw.participants.map((participant) => {
                                 const isWinner = participant.userId === draw.winner.id;
                                 return (
-                                  <tr key={participant.userId} className={isWinner ? 'bg-green-50' : 'bg-white'}>
+                                  <tr key={participant.userId} className={isWinner ? 'bg-red-50' : 'bg-white'}>
                                     <td className="px-3 py-2">
                                       <span className={`inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold ${
                                         participant.rank === 1 ? 'bg-yellow-400 text-yellow-900' :
@@ -342,7 +342,7 @@ export default function WinnersModal({ isOpen, onClose }: WinnersModalProps) {
                                       </div>
                                     </td>
                                     <td className="px-3 py-2 text-right">
-                                      <span className={`font-semibold text-xs ${participant.realizedPnl >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                      <span className={`font-semibold text-xs ${participant.realizedPnl >= 0 ? 'text-red-600' : 'text-red-800'}`}>
                                         {participant.realizedPnl >= 0 ? '+' : ''}{participant.realizedPnl.toLocaleString('en-US', {
                                           style: 'currency',
                                           currency: 'USD',
@@ -355,7 +355,7 @@ export default function WinnersModal({ isOpen, onClose }: WinnersModalProps) {
                                     </td>
                                     <td className="px-3 py-2 text-center">
                                       {isWinner && (
-                                        <span className="inline-flex items-center gap-1 bg-green-600 text-white px-2 py-0.5 rounded-full text-xs font-bold">
+                                        <span className="inline-flex items-center gap-1 bg-red-600 text-white px-2 py-0.5 rounded-full text-xs font-bold">
                                           🏆 WIN
                                         </span>
                                       )}
@@ -382,7 +382,7 @@ export default function WinnersModal({ isOpen, onClose }: WinnersModalProps) {
                             href={draw.txUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-green-600 hover:text-green-700 font-semibold text-xs flex items-center gap-1"
+                            className="text-red-600 hover:text-red-700 font-semibold text-xs flex items-center gap-1"
                           >
                             View on Solscan
                             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -1,4 +1,4 @@
-// Types for printer management application
+// Types for Pro Nuke League (PNL) application
 
 export interface User {
   id: string;

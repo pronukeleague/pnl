@@ -113,7 +113,7 @@ export async function performDraw(): Promise<{ success: boolean; drawId?: string
       return { success: true, drawId };
     }
 
-    // Get top 3 traders by realized PNL (excluding those who sold $PRINT)
+    // Get top 3 traders by realized PNL (excluding those who sold $PNL)
     const topTraders = await DailyTrader.find({
       seasonId,
       isActive: true,
@@ -205,17 +205,9 @@ export async function performDraw(): Promise<{ success: boolean; drawId?: string
   }
 }
 
-// Check if it's time for a draw (every 2 hours at even hours)
+// Check if it's time for a draw (every hour)
 export async function shouldPerformDraw(): Promise<boolean> {
   const now = new Date();
-  const currentHour = now.getUTCHours();
-
-  // Draw happens only at even hours (00, 02, 04, 06, 08, 10, 12, 14, 16, 18, 20, 22)
-  const isEvenHour = currentHour % 2 === 0;
-  
-  if (!isEvenHour) {
-    return false;
-  }
 
   // Check if draw already exists for this hour
   const drawId = generateDrawId(now);

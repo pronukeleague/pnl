@@ -112,7 +112,7 @@ export default function PlayerCard({
     setNameError(null);
 
     try {
-      const token = localStorage.getItem('onlyprinters_auth_token');
+      const token = localStorage.getItem('pnl_auth_token');
       if (!token) {
         setNameError('Authentication required');
         return;
@@ -167,7 +167,7 @@ export default function PlayerCard({
     
     // Fetch remaining changes
     try {
-      const token = localStorage.getItem('onlyprinters_auth_token');
+      const token = localStorage.getItem('pnl_auth_token');
       if (!token) return;
 
       const response = await fetch('/api/users/name-changes-remaining', {
@@ -225,11 +225,11 @@ export default function PlayerCard({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 border border-green-200">
+    <div className="bg-white rounded-lg shadow-md p-6 border border-red-200">
       <div className="text-center">
         {/* Avatar */}
         <div className="flex justify-center mb-4">
-          <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-green-500">
+          <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-red-600">
             <Image
               src={avatar}
               alt={name}
@@ -250,7 +250,7 @@ export default function PlayerCard({
                 setEditedName(e.target.value);
                 validateName(e.target.value);
               }}
-              className={`w-full px-3 py-2 text-center text-lg font-bold border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 ${
+              className={`w-full px-3 py-2 text-center text-lg font-bold border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400 ${
                 nameError ? 'border-red-400' : 'border-gray-300'
               }`}
               maxLength={50}
@@ -270,7 +270,7 @@ export default function PlayerCard({
               <button
                 onClick={handleSaveName}
                 disabled={isSavingName || !!nameError}
-                className="flex-1 px-3 py-1 bg-green-500 hover:bg-green-600 disabled:bg-gray-300 text-white text-sm font-semibold rounded-lg transition-colors"
+                className="flex-1 px-3 py-1 bg-red-600 hover:bg-red-700 disabled:bg-gray-300 text-white text-sm font-semibold rounded-lg transition-colors"
               >
                 {isSavingName ? 'Saving...' : 'Save'}
               </button>
@@ -290,7 +290,7 @@ export default function PlayerCard({
             </h2>
             <button
               onClick={handleStartEdit}
-              className="ml-2 text-gray-500 hover:text-green-600 transition-colors"
+              className="ml-2 text-gray-500 hover:text-red-600 transition-colors"
               title="Edit name (2 changes per 24h)"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 inline" viewBox="0 0 20 20" fill="currentColor">
@@ -309,14 +309,14 @@ export default function PlayerCard({
         
         {/* Token Balance */}
         <p className="text-sm text-gray-600 mb-4">
-          {tokenBalance.toLocaleString()} $PRINT
+          {tokenBalance.toLocaleString()} $PNL
         </p>
 
         {/* Total PNL (24h) */}
-        <div className="mb-4 p-3 rounded-lg bg-gradient-to-r from-green-50 to-green-100 border border-green-200">
+        <div className="mb-4 p-3 rounded-lg bg-gradient-to-r from-red-50 to-red-100 border border-red-200">
           <div className="text-xs text-gray-600 mb-1">Total PNL (24h)</div>
           <div className={`text-2xl font-bold ${
-            isProfitable ? 'text-green-600' : 'text-red-600'
+            isProfitable ? 'text-red-600' : 'text-red-800'
           }`}>
             {isProfitable ? '+' : ''}{totalPnl.toLocaleString('en-US', {
               style: 'currency',
@@ -333,7 +333,7 @@ export default function PlayerCard({
             <span className="text-sm font-semibold text-gray-700">🏆 Realized PNL</span>
             <div className="text-right">
               <div className={`text-base font-bold ${
-                realizedUsdPnl >= 0 ? 'text-green-600' : 'text-red-600'
+                realizedUsdPnl >= 0 ? 'text-red-600' : 'text-red-800'
               }`}>
                 {realizedUsdPnl >= 0 ? '+' : ''}{realizedUsdPnl.toLocaleString('en-US', {
                   style: 'currency',
@@ -342,7 +342,7 @@ export default function PlayerCard({
                 })}
               </div>
               <div className={`text-xs font-semibold ${
-                realizedSolPnl >= 0 ? 'text-green-600' : 'text-red-600'
+                realizedSolPnl >= 0 ? 'text-red-600' : 'text-red-800'
               }`}>
                 {realizedSolPnl >= 0 ? '+' : ''}{realizedSolPnl.toFixed(3)} SOL
               </div>
@@ -361,9 +361,9 @@ export default function PlayerCard({
               <div className="text-xs text-gray-600">Total</div>
               <div className="text-sm font-bold text-blue-600">{totalTrades}</div>
             </div>
-            <div className="p-2 rounded bg-green-50 text-center">
+            <div className="p-2 rounded bg-red-50 text-center">
               <div className="text-xs text-gray-600">Buys</div>
-              <div className="text-sm font-bold text-green-600">{buyCount}</div>
+              <div className="text-sm font-bold text-red-600">{buyCount}</div>
             </div>
             <div className="p-2 rounded bg-red-50 text-center">
               <div className="text-xs text-gray-600">Sells</div>
@@ -412,7 +412,7 @@ export default function PlayerCard({
           </div>
 
           {/* Realized Trading (Closed Positions) */}
-          <div className="p-2 rounded bg-green-50 border border-green-200">
+          <div className="p-2 rounded bg-red-50 border border-red-200">
             <div className="text-xs text-gray-700 font-semibold mb-1">✅ Realized Trading</div>
             <div className="flex justify-between text-xs">
               <span className="text-gray-600">USD Volume:</span>
@@ -430,19 +430,19 @@ export default function PlayerCard({
                 {pnlBreakdown.over500Percent > 0 && (
                   <div className="flex justify-between text-xs">
                     <span className="text-gray-600">🚀 &gt;500%:</span>
-                    <span className="font-bold text-green-600">{pnlBreakdown.over500Percent}</span>
+                    <span className="font-bold text-red-600">{pnlBreakdown.over500Percent}</span>
                   </div>
                 )}
                 {pnlBreakdown.between200And500Percent > 0 && (
                   <div className="flex justify-between text-xs">
                     <span className="text-gray-600">🎯 200-500%:</span>
-                    <span className="font-semibold text-green-600">{pnlBreakdown.between200And500Percent}</span>
+                    <span className="font-semibold text-red-600">{pnlBreakdown.between200And500Percent}</span>
                   </div>
                 )}
                 {pnlBreakdown.between0And200Percent > 0 && (
                   <div className="flex justify-between text-xs">
                     <span className="text-gray-600">📈 0-200%:</span>
-                    <span className="font-semibold text-green-500">{pnlBreakdown.between0And200Percent}</span>
+                    <span className="font-semibold text-red-500">{pnlBreakdown.between0And200Percent}</span>
                   </div>
                 )}
                 {pnlBreakdown.between0AndNeg50Percent > 0 && (
@@ -490,7 +490,7 @@ export default function PlayerCard({
           {recalcMessage && (
             <div className={`mt-2 p-2 rounded text-xs text-center ${
               recalcMessage.startsWith('✅') 
-                ? 'bg-green-100 text-green-800' 
+                ? 'bg-red-100 text-red-800' 
                 : 'bg-red-100 text-red-800'
             }`}>
               {recalcMessage}
@@ -500,8 +500,8 @@ export default function PlayerCard({
 
         {/* Status Badge */}
         <div className="mt-2">
-          <div className="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-800 text-xs font-semibold">
-            <span className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+          <div className="inline-flex items-center px-3 py-1 rounded-full bg-red-100 text-red-800 text-xs font-semibold">
+            <span className="w-2 h-2 bg-red-500 rounded-full mr-2 animate-pulse"></span>
             Active Today
           </div>
         </div>

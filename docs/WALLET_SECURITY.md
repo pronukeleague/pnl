@@ -35,7 +35,7 @@ wallet.signAllTransactions()  // ❌ Never used - can't batch steal
 When you "connect" your wallet, we only ask for a **signature** to prove ownership:
 ```typescript
 // The message you sign (you can read it in your wallet):
-"Sign this message to authenticate with onlyPrinters.\n\nThis will NOT trigger a transaction or cost any gas.\n\nTimestamp: [current_time]"
+"Sign this message to authenticate with Pro Nuke League.\n\nThis will NOT trigger a transaction or cost any gas.\n\nTimestamp: [current_time]"
 ```
 
 **This signature:**
@@ -73,7 +73,7 @@ If you see a popup asking to:
 
 ### Step 3: Review Our Open Source Code
 All our wallet integration code is public:
-- GitHub: [your-repo-link]
+- GitHub: [https://github.com/pronukeleague/pnl](https://github.com/pronukeleague/pnl)
 - File: `src/contexts/WalletContext.tsx`
 - You or any developer can audit it
 
@@ -139,7 +139,7 @@ We request the **absolute minimum** permissions needed:
 1. **Never asks for seed phrase** - We don't need it
 2. **Never requests token approvals** - We only read balances
 3. **No urgency tactics** - Trade at your own pace
-4. **Clear domain** - [your-domain.com]
+4. **Clear domain** - pnl.best
 5. **Manual approval only** - You control everything
 
 ## 🔗 Additional Resources
@@ -150,7 +150,7 @@ We request the **absolute minimum** permissions needed:
 - [How Wallet Adapters Work](https://github.com/solana-labs/wallet-adapter)
 
 ### Audit Our Code:
-- GitHub Repository: [link](https://github.com/onlyprinters/op)
+- GitHub Repository: [https://github.com/pronukeleague/pnl](https://github.com/pronukeleague/pnl)
 - Wallet Integration: `src/contexts/WalletContextProvider.tsx`
 - API Endpoints: `src/app/api/`
 
@@ -178,8 +178,8 @@ We request the **absolute minimum** permissions needed:
 ## 📞 Report Security Concerns
 
 If you notice anything suspicious:
-- Email: security@[onlyprinters.fun]
-- Twitter DM: [@onlyprinters_]
+- Email: security@pnl.best
+- Twitter DM: [@pronukeleague]
 
 We take security seriously and respond within 24 hours.
 

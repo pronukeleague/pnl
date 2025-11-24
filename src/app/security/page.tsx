@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Wallet Security | onlyPrinters',
+  title: 'Wallet Security | Pro Nuke League',
   description: 'Learn how we protect your wallet and why connecting is safe',
 };
 
@@ -64,27 +64,27 @@ export default function SecurityPage() {
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <span className="text-2xl">✅</span>
-                <h3 className="text-xl font-bold text-green-600 dark:text-green-400">
+                <h3 className="text-xl font-bold text-red-600 dark:text-red-400">
                   What We CAN Do
                 </h3>
               </div>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2">
-                  <span className="text-green-500 mt-1">•</span>
+                  <span className="text-red-500 mt-1">•</span>
                   <div>
                     <p className="font-semibold text-gray-900 dark:text-white">Read your address</p>
                     <p className="text-sm text-gray-600 dark:text-gray-400">To identify you in the competition</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-green-500 mt-1">•</span>
+                  <span className="text-red-500 mt-1">•</span>
                   <div>
                     <p className="font-semibold text-gray-900 dark:text-white">Request signature</p>
                     <p className="text-sm text-gray-600 dark:text-gray-400">To verify you own the wallet (costs $0)</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-green-500 mt-1">•</span>
+                  <span className="text-red-500 mt-1">•</span>
                   <div>
                     <p className="font-semibold text-gray-900 dark:text-white">Check token balance</p>
                     <p className="text-sm text-gray-600 dark:text-gray-400">To verify competition entry requirement</p>
@@ -137,7 +137,7 @@ export default function SecurityPage() {
             </h2>
           </div>
           <p className="text-gray-400 mb-4">
-            This is the <span className="text-green-400 font-semibold">complete</span> code we use for wallet connection.
+            This is the <span className="text-red-400 font-semibold">complete</span> code we use for wallet connection.
             Nothing hidden, nothing malicious.
           </p>
           <div className="bg-black rounded-lg p-4 overflow-x-auto">
@@ -156,7 +156,7 @@ wallet.sendTransaction();      // ❌ Never used`}
             <span>📁</span>
             <span>See full code: </span>
             <a
-              href="https://github.com/onlyprinters/op/blob/main/src/contexts/WalletContextProvider.tsx"
+              href="https://github.com/pronukeleague/pnl/blob/main/src/contexts/WalletContextProvider.tsx"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-400 hover:text-blue-300 underline"
@@ -180,19 +180,26 @@ wallet.sendTransaction();      // ❌ Never used`}
           <div className="grid md:grid-cols-2 gap-4">
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
               <p className="font-semibold text-gray-900 dark:text-white mb-2">Magic Eden</p>
-              <code className="text-xs text-green-600 dark:text-green-400">@solana/wallet-adapter-react</code>
+              <code className="text-xs text-red-600 dark:text-red-400">@solana/wallet-adapter-react</code>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
               <p className="font-semibold text-gray-900 dark:text-white mb-2">Jupiter Exchange</p>
-              <code className="text-xs text-green-600 dark:text-green-400">@solana/wallet-adapter-react</code>
+              <code className="text-xs text-red-600 dark:text-red-400">@solana/wallet-adapter-react</code>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
               <p className="font-semibold text-gray-900 dark:text-white mb-2">Tensor</p>
-              <code className="text-xs text-green-600 dark:text-green-400">@solana/wallet-adapter-react</code>
+              <code className="text-xs text-red-600 dark:text-red-400">@solana/wallet-adapter-react</code>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
-              <p className="font-semibold text-gray-900 dark:text-white mb-2">onlyPrinters (us!)</p>
-              <code className="text-xs text-green-600 dark:text-green-400">@solana/wallet-adapter-react</code>
+              <p className="font-semibold text-gray-900 dark:text-white mb-2">
+                <span className="text-red-600">P</span>
+                <span>ro </span>
+                <span className="text-red-600">N</span>
+                <span>uke </span>
+                <span className="text-red-600">L</span>
+                <span>eague (us!)</span>
+              </p>
+              <code className="text-xs text-red-600 dark:text-red-400">@solana/wallet-adapter-react</code>
             </div>
           </div>
         </div>

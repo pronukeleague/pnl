@@ -1,25 +1,25 @@
 import type { Metadata } from "next";
-import { Fjalla_One } from "next/font/google";
-import localFont from "next/font/local";
+import { Press_Start_2P, Pixelify_Sans } from "next/font/google";
 import "./globals.css";
 import { WalletContextProvider } from "@/contexts/WalletContextProvider";
 import Header from "@/components/Header";
 import SecurityBadge from "@/components/SecurityBadge";
 
-const fjallaOne = Fjalla_One({
-  variable: "--font-fjalla-one",
+const pressStart2P = Press_Start_2P({
+  variable: "--font-press-start",
   subsets: ["latin"],
   weight: ["400"],
 });
 
-const astronBoy = localFont({
-  src: "../../public/astron-boy.rg-regular.otf",
-  variable: "--font-astron-boy",
+const pixelifySans = Pixelify_Sans({
+  variable: "--font-pixelify",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "OnlyPrinters",
-  description: "OnlyPrinters.fun is the place where all printers meet.",
+  title: "Pro Nuke League - PNL",
+  description: "Pro Nuke League (PNL) - The ultimate Solana trading competition at pnl.best",
 };
 
 export default function RootLayout({
@@ -30,7 +30,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${fjallaOne.variable} ${astronBoy.variable} font-[family-name:var(--font-fjalla-one)] antialiased`}
+        className={`${pressStart2P.variable} ${pixelifySans.variable} antialiased`}
+        style={{ fontFamily: 'var(--font-press-start)' }}
       >
         <WalletContextProvider>
           <Header />

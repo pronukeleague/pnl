@@ -165,7 +165,7 @@ export default function SecurityBadge() {
 
   return (
     <div
-      className="security-tooltip fixed z-50 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-2xl border-2 border-green-500 dark:border-green-400 p-4"
+      className="security-tooltip fixed z-50 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-2xl border-2 border-red-500 dark:border-red-400 p-4"
       style={{
         top: `${buttonRect.bottom + window.scrollY + 8}px`,
         left: `${buttonRect.left + window.scrollX}px`
@@ -190,7 +190,7 @@ export default function SecurityBadge() {
 
       <div className="space-y-2.5 text-sm">
         <div className="flex items-start gap-2">
-          <span className="text-green-500 mt-0.5">✓</span>
+          <span className="text-red-500 mt-0.5">✓</span>
           <div>
             <p className="font-semibold text-gray-900 dark:text-white">Read-Only Access</p>
             <p className="text-gray-600 dark:text-gray-400 text-xs">
@@ -200,7 +200,7 @@ export default function SecurityBadge() {
         </div>
 
         <div className="flex items-start gap-2">
-          <span className="text-green-500 mt-0.5">✓</span>
+          <span className="text-red-500 mt-0.5">✓</span>
           <div>
             <p className="font-semibold text-gray-900 dark:text-white">Signature Auth Only</p>
             <p className="text-gray-600 dark:text-gray-400 text-xs">
@@ -210,7 +210,7 @@ export default function SecurityBadge() {
         </div>
 
         <div className="flex items-start gap-2">
-          <span className="text-green-500 mt-0.5">✓</span>
+          <span className="text-red-500 mt-0.5">✓</span>
           <div>
             <p className="font-semibold text-gray-900 dark:text-white">Open Source</p>
             <p className="text-gray-600 dark:text-gray-400 text-xs">

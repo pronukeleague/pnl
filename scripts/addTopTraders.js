@@ -180,7 +180,7 @@ async function addTopTraders() {
         console.log(`   DailyTrader entries skipped: ${tradersSkipped}`);
         console.log('='.repeat(60));
         console.log('\n✅ Script completed successfully!');
-        console.log('💡 Stats will be updated automatically by the cron job (every 10 minutes)');
+        console.log('💡 Stats will be updated automatically by the cron job (every 5 minutes)');
         console.log('💡 Or manually call: POST /api/daily-traders/update-stats\n');
 
     } catch (error) {
