@@ -1,4 +1,4 @@
-# � Pro Nuke League (PNL)
+# ☢️ Pro Nuke League (PNL)
 
 <div align="center">
 
@@ -28,6 +28,7 @@
 - 🤖 **Fully Automated**: No manual intervention — everything runs on schedule
 - 🌐 **100% Open Source**: Complete transparency, audit our code anytime
 - 🎯 **Token-Gated**: Requires 1,000,000 $PNL tokens to participate
+- 💎 **$PNL Token**: `ZttCQjTRNYugZq47479WHyfL7bEAG8qqLWqGcYjiPNL`
 
 ---
 
@@ -243,10 +244,9 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 ## 🔗 Links
 
 - 🌐 **Website**: [pnl.best](https://pnl.best)
-- 🐦 **Twitter/X**: [Follow us](https://x.com/pronukeleague)
-- 💬 **Telegram**: [Join community](https://t.me/pronukeleague)
+- 🐦 **Twitter/X**: [@PNL_BEST](https://x.com/PNL_BEST)
 - 📚 **Security Docs**: [Wallet Security Guide](https://pnl.best/security)
-- 🔍 **Token**: View $PNL on [To be launched](https://solscan.io)
+- 🔍 **Token**: `ZttCQjTRNYugZq47479WHyfL7bEAG8qqLWqGcYjiPNL`
 
 ---
 
